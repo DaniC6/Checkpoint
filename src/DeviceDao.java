@@ -12,11 +12,12 @@ public class DeviceDao {
 
     public List<Device> getAllDeviceWIthHearthRateAndGps(String username){
 
-        try(Connection conn = DriverManager.getConnection ( ConnectionDB.getUrl (),ConnectionDB.getUser (),ConnectionDB.getPassword () );
-            PreparedStatement prep = conn.prepareStatement ( "SELECT * FROM device WHERE device_has_gps = ? AND device_has_heartrate = ?" )){
+        try(Connection conn = DriverManager.getConnection (ConnectionDB.getUrl(),ConnectionDB.getUser(),ConnectionDB.getPassword());
+            PreparedStatement prep = conn.prepareStatement ("SELECT * FROM device WHERE device_has_gps = ? AND device_has_heartrate = ? AND username = ?" )){
 
             prep.setInt (1,1);
             prep.setInt (2,1);
+            prep.setString (3,username);
 
             res = prep.executeQuery ();
 
